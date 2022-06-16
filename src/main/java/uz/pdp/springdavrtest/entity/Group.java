@@ -39,4 +39,5 @@ public class Group {
 
     @OneToMany
     private List<Student> students;
+
 }

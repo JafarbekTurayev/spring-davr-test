@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,7 +25,8 @@ public class Payment {
     @ManyToOne
     private Student student;
 
-    @CreatedDate
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date createdDate;
 
     @ManyToOne
