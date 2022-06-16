@@ -38,6 +38,5 @@ public class Group {
     private Status status;
 
     @OneToMany
-    @JoinColumn(name = "group_student")
     private List<Student> students;
 }
