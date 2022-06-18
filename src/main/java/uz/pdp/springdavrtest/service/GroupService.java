@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.springdavrtest.dto.ApiResponse;
 import uz.pdp.springdavrtest.dto.GroupDTO;
+import uz.pdp.springdavrtest.dto.ResGroupDTO;
 import uz.pdp.springdavrtest.entity.*;
 import uz.pdp.springdavrtest.repository.*;
 import uz.pdp.springdavrtest.utils.DateFormatUtil;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,7 +58,7 @@ public class GroupService {
         Optional<Group> optionalGroup = groupRepository.findById(id);
         if (!optionalGroup.isPresent()) return ApiResponse.builder().success(false).message("Not").build();
 
-        return ApiResponse.builder().message("Mana").data(optionalGroup.get()).success(true).build();
+        return ApiResponse.builder().message("Mana").data(mapToDTO(optionalGroup.get())).success(true).build();
     }
 
     public ApiResponse edit(Long ketmon, GroupDTO groupDTO) {
@@ -86,4 +88,32 @@ public class GroupService {
         groupRepository.deleteById(id);
         return ApiResponse.builder().success(true).message("Deleted!").build();
     }
+
+    public ApiResponse addStudent(Long studentId, Long groupId) {
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student Not found!"));
+        Group group = groupRepository.findById(groupId).orElseThrow(() -> new RuntimeException("Group Not found!"));
+
+        //eski royhatni olib
+        List<Student> students = group.getStudents();
+        students.add(student);
+        //yangiladik
+        group.setStudents(students);
+        Group save = groupRepository.save(group);
+        return ApiResponse.builder().data(save).success(true).message("Student added to Group").build();
+    }
+
+
+    //metod Entitydan RESGROUPDTO ga o'tkazish
+    public ResGroupDTO mapToDTO(Group group) {
+        return ResGroupDTO.builder()
+                .startDate(String.valueOf(group.getStartDate()))
+                .endDate(String.valueOf(group.getEndDate()))
+                .courseName(group.getCourse().getName())
+                .teacherName(group.getTeacher().getFullName())
+                .groupName(group.getName())
+                .roomName(group.getRoom().getName())
+                .statusName(group.getStatus().getName())
+                .build();
+    }
+
 }

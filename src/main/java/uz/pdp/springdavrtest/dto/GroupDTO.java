@@ -28,5 +28,4 @@ public class GroupDTO {
     private String endDate;
     private Long roomId;
     private Long statusId;
-
 }

@@ -17,9 +17,15 @@ public class GroupController {
     GroupService groupService;
 
     @PostMapping
+    //ResponseEntity butun dunyo standarti REST API un
     public ApiResponse add(@RequestBody GroupDTO groupDTO) {
         ApiResponse apiResponse = groupService.addGroup(groupDTO);
         return apiResponse;
+    }
+
+    @PostMapping("/addStudent")
+    public ApiResponse addStudentToGroup(@RequestParam Long studentId, @RequestParam Long groupId) {
+        return groupService.addStudent(studentId, groupId);
     }
 
     @GetMapping
@@ -41,4 +47,6 @@ public class GroupController {
     public ApiResponse delete(@RequestParam Long id) {
         return groupService.delete(id);
     }
+
+
 }
