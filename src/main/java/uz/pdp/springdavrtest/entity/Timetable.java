@@ -31,7 +31,9 @@ public class Timetable {
     private List<Group> group;
     @ManyToOne
     private Day day;
+    @Temporal(TemporalType.TIME)
     private Date startTime;
+    @Temporal(TemporalType.TIME)
     private Date endTime;
 
 }

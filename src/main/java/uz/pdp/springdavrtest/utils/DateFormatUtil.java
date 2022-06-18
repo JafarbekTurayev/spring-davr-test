@@ -18,4 +18,14 @@ public class DateFormatUtil {
         }
         return parse;
     }
+    public Date dateConvertorTime(String sana) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        Date parse = null;
+        try {
+            parse = simpleDateFormat.parse(sana);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return parse;
+    }
 }

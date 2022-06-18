@@ -9,8 +9,10 @@ import uz.pdp.springdavrtest.entity.*;
 import uz.pdp.springdavrtest.repository.*;
 import uz.pdp.springdavrtest.utils.DateFormatUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupService {
@@ -51,7 +53,16 @@ public class GroupService {
     }
 
     public ApiResponse getAll() {
-        return ApiResponse.builder().success(true).message("Mana").data(groupRepository.findAll()).build();
+        List<Group> all = groupRepository.findAll();
+        //1-variant
+        List<ResGroupDTO> collect = all.stream().map(this::mapToDTO).collect(Collectors.toList());
+//2-variant
+        //        List<ResGroupDTO> collect = new ArrayList<>();
+//        for (Group group : all) {
+//            ResGroupDTO resGroupDTO = mapToDTO(group);
+//            collect.add(resGroupDTO);
+//        }
+        return ApiResponse.builder().success(true).message("Mana").data(collect).build();
     }
 
     public ApiResponse getOne(Long id) {
@@ -105,15 +116,7 @@ public class GroupService {
 
     //metod Entitydan RESGROUPDTO ga o'tkazish
     public ResGroupDTO mapToDTO(Group group) {
-        return ResGroupDTO.builder()
-                .startDate(String.valueOf(group.getStartDate()))
-                .endDate(String.valueOf(group.getEndDate()))
-                .courseName(group.getCourse().getName())
-                .teacherName(group.getTeacher().getFullName())
-                .groupName(group.getName())
-                .roomName(group.getRoom().getName())
-                .statusName(group.getStatus().getName())
-                .build();
+        return ResGroupDTO.builder().startDate(String.valueOf(group.getStartDate())).endDate(String.valueOf(group.getEndDate())).courseName(group.getCourse().getName()).teacherName(group.getTeacher().getFullName()).groupName(group.getName()).roomName(group.getRoom().getName()).statusName(group.getStatus().getName()).build();
     }
 
 }
