@@ -43,4 +43,9 @@ public class TimetableController {
     public ApiResponse delete(@RequestParam UUID id) {
         return timetableService.delete(id);
     }
+
+    @GetMapping("/info")
+    public ApiResponse info(){
+        return timetableService.getInfo();
+    }
 }

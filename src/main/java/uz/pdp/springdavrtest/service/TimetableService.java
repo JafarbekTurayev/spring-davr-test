@@ -3,11 +3,13 @@ package uz.pdp.springdavrtest.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.springdavrtest.dto.ApiResponse;
+import uz.pdp.springdavrtest.dto.ResInfoDTO;
 import uz.pdp.springdavrtest.dto.TimetableDTO;
 import uz.pdp.springdavrtest.entity.*;
 import uz.pdp.springdavrtest.repository.*;
 import uz.pdp.springdavrtest.utils.DateFormatUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -76,5 +78,27 @@ public class TimetableService {
     public ApiResponse delete(UUID id) {
         timetableRepository.deleteById(id);
         return ApiResponse.builder().success(true).message("Deleted!").build();
+    }
+
+    public ApiResponse getInfo() {
+        List<Timetable> all = timetableRepository.findAll();
+        List<ResInfoDTO> resInfoDTOList=new ArrayList<>();
+
+        for (Timetable timetable : all) {
+            Day day = timetable.getDay();
+            List<Group> groupList = timetable.getGroup();
+            for (Group group : groupList) {
+                String groupName = group.getName();
+                String roomName = group.getRoom().getName();
+                String fullName = group.getTeacher().getFullName();
+                ResInfoDTO resInfoDTO = new ResInfoDTO();
+                resInfoDTO.setDayName(day.getName());
+                resInfoDTO.setTeacherName(fullName);
+                resInfoDTO.setRoomName(roomName);
+                resInfoDTO.setGroupName(groupName);
+                resInfoDTOList.add(resInfoDTO);
+            }
+        }
+        return ApiResponse.builder().message("INFO").success(true).data(resInfoDTOList).build();
     }
 }
