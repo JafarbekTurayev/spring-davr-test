@@ -41,4 +41,9 @@ public class TeacherController {
     public ApiResponse delete(@RequestParam Long id) {
         return teacherService.delete(id);
     }
+
+    @GetMapping("/T_students/{id}")
+    public ApiResponse getTeacherStudents(@PathVariable Long id){
+        return teacherService.getteacherstudent(id);
+    }
 }
