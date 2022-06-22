@@ -6,9 +6,9 @@ import uz.pdp.springdavrtest.dto.ApiResponse;
 import uz.pdp.springdavrtest.dto.ResGroupDTO;
 import uz.pdp.springdavrtest.entity.Day;
 import uz.pdp.springdavrtest.entity.Group;
-import uz.pdp.springdavrtest.entity.Timetable;
+import uz.pdp.springdavrtest.entity.TimeTable;
 import uz.pdp.springdavrtest.repository.DayRepository;
-import uz.pdp.springdavrtest.repository.TimetableRepository;
+import uz.pdp.springdavrtest.repository.TimeTableRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 public class DayService {
 
     @Autowired
-    TimetableRepository timetableRepository;
+    TimeTableRepository timetableRepository;
     @Autowired
     DayRepository dayRepository;
 
     public ApiResponse getGroups(Long dayId) {
-        List<Timetable> timetableList= timetableRepository.findAll();
+        List<TimeTable> timetableList= timetableRepository.findAll();
         Optional<Day> optionalDay = dayRepository.findById(dayId);
         Set<Group> groupSet = new HashSet<>();
         if (!optionalDay.isPresent()){
@@ -30,9 +30,9 @@ public class DayService {
         }
         else {
             Day day = optionalDay.get();
-            for (Timetable timetable : timetableList) {
+            for (TimeTable timetable : timetableList) {
                 if (timetable.getDay().equals(day)){
-                    List<Group> groups = timetable.getGroup();
+                    List<Group> groups = timetable.getGroups();
                     for (Group group : groups) {
                         groupSet.add(group);
                     }

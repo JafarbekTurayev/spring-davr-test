@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uz.pdp.springdavrtest.dto.ApiResponse;
 import uz.pdp.springdavrtest.repository.DayRepository;
-import uz.pdp.springdavrtest.repository.TimetableRepository;
+import uz.pdp.springdavrtest.repository.TimeTableRepository;
 import uz.pdp.springdavrtest.service.DayService;
 
 @RequestMapping("/day")
@@ -17,7 +17,7 @@ public class DayController {
     DayRepository dayRepository;
 
     @Autowired
-    TimetableRepository timetableRepository;
+    TimeTableRepository timetableRepository;
 
     @Autowired
     DayService dayServise;

@@ -32,6 +32,35 @@ public class DateFormatUtil {
         return parse;
     }
 
+    // this method for TimeTable. Don't touch
+    public Date parseTime(String str) {
+        Date time;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        try {
+            time = dateFormat.parse(str);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return time;
+    }
+    // this method for TimeTable. Don't touch
+    public String parseTime(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        String sss = dateFormat.format(date);
+        System.out.println(sss);
+        return sss;
+    }
+
+
+
+
+
+
+
+
+
+
+
     // dateConvertorTime metodida Date eski edi 1970 ni kursata yotgandi
     // huddi shu metodni yangilab yozdim bunda date current buladi yani kalendarda qaysi sana bulsa shu buladi
     public Date dateConvertorTimeWithCurrentDate(String sana) {
