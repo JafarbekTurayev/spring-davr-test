@@ -2,6 +2,7 @@ package uz.pdp.springdavrtest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.springdavrtest.dto.ApiResponse;
@@ -31,7 +32,7 @@ public class RoomController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ApiResponse getAll() {
         List<Room> roomList = roomRepository.findAll();
         return ApiResponse.builder().success(true).message("mana").data(roomList).build();
@@ -65,7 +66,7 @@ public class RoomController {
     }
 
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ApiResponse delete(@PathVariable Long id) {
         roomRepository.deleteById(id);
         return ApiResponse.builder().success(true).message("Mana").build();

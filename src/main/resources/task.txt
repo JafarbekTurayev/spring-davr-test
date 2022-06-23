@@ -1,0 +1,15 @@
+Asosiy zadacha alohida branch ochib zadachani bajarib oziga push qilib merge reuqest yaratish
+1.Vaqt bilan ishlash tog'rilash(Azamat soat ishlamayapti) Date Timestamp
+2.day crud Sultonmurodov
+3.Student crud Zokirjon
+4.Paytype crud MuhammadSharif
+5.Student add group ichida agar guruh to'lgan bo'lsa qo'shmasin student Sobirov Azizbek
+6.Group add bo'lganda dtodan olib tashlash statusni va avtomatik NEW qilib qoyish AbdulHamid
+7.Timetable o'ylab ko'rish  Husniddin
+8.info Teacher qaysi guruhlarga dars beradi Bahodir
+9.info DAY dushanba kuni qaysi guruhlarga dars bor Doniyor
+10.info DAY va ROOM bir kunda qaysi guruhlar va teacherlar, studentlar info Ismoil
+11.bitta studentni paymentlar listi Xurshidbek
+12.bitta ustozni qaysi studentlarga dars berishi kerak Doniyor Nomozov
+13.studentni qaysi ustozni qo'lida o'qishi MuhammadAziz
+14.O'quvchini guruh almashtirish imkoni qilish kk Sardor
